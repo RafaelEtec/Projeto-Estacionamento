@@ -38,9 +38,9 @@ public class CarroDAO {
             ps.setString(3, carro.getDescricao());
 
             if (ps.executeUpdate() > 0) {
-                return "Inserido com sucesso";
+                return "Inserido com sucesso \n";
             } else {
-                return "Erro ao inserir";
+                return "Erro ao inserir \n";
             }
 
         } catch (SQLException ex) {

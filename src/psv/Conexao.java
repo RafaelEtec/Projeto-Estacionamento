@@ -17,7 +17,7 @@ public class Conexao {
 
             //Conectando a url ao Driver e instanciando  a conexão com o Banco de dados
             con = DriverManager.getConnection(url);
-            System.out.println("Conexão aberta");
+            System.out.println("Conexão aberta \n");
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

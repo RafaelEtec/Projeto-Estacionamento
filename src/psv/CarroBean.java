@@ -9,14 +9,7 @@ public class CarroBean {
     //Criano o construtos
     public CarroBean() {
         
-    }
-    public CarroBean(String placa, String cor, String descricao) {
-        this.placa = placa;
-        this.cor = cor;
-        this.descricao = descricao;
-    }
-    
-    
+    }    
     //Criando os métodos Getters e Setters
     public String getPlaca() {
         return placa;
