@@ -50,7 +50,7 @@ public class CarroDAO {
 
     //Criar o método update
     public String alterarCarro(CarroBean carro) {
-        String sql = "update tbcarro set cor = ? where placa = ?";
+        String sql = "update tbcarro set cor = ?, descricao = ? where placa = ?";
 
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);

@@ -55,7 +55,7 @@ public class JFCarro extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnPesquisar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         pnlEspaco = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbConsulta = new javax.swing.JTable();
@@ -100,6 +100,7 @@ public class JFCarro extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         pnlTitulo.setBackground(new java.awt.Color(255, 255, 255));
@@ -230,10 +231,10 @@ public class JFCarro extends javax.swing.JFrame {
             }
         });
 
-        btnFechar.setText("Fechar");
-        btnFechar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFecharMouseClicked(evt);
+                btnVoltarMouseClicked(evt);
             }
         });
 
@@ -253,7 +254,7 @@ public class JFCarro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlBotoesLayout.setVerticalGroup(
@@ -261,7 +262,7 @@ public class JFCarro extends javax.swing.JFrame {
             .addGroup(pnlBotoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFechar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(btnIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -407,10 +408,10 @@ public class JFCarro extends javax.swing.JFrame {
         Conexao.fecharConexao(con);
     }//GEN-LAST:event_btnPesquisarMouseClicked
 
-    private void btnFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFecharMouseClicked
+    private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
         //Fecha a janela
         System.exit(0);
-    }//GEN-LAST:event_btnFecharMouseClicked
+    }//GEN-LAST:event_btnVoltarMouseClicked
 
     private void tbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbConsultaMouseClicked
         //Passando os valores da lina da tabela para os campos
@@ -503,10 +504,10 @@ public class JFCarro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnIncluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
