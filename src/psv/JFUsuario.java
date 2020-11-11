@@ -21,6 +21,7 @@ public class JFUsuario extends javax.swing.JFrame {
     public JFUsuario() {
         initComponents();
         lblMensagem.setText("");
+        txtCodigo.setText("0000");
     }
 
     /**
@@ -40,11 +41,11 @@ public class JFUsuario extends javax.swing.JFrame {
         btnIncluirUsu = new javax.swing.JButton();
         btnAlterarUsu = new javax.swing.JButton();
         btnExcluirUsu = new javax.swing.JButton();
-        btnPesquisarUsu = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         btnLimparUsu = new javax.swing.JButton();
         btnVoltarUsu = new javax.swing.JButton();
         pnlCentral = new javax.swing.JPanel();
-        lvlCodigo = new javax.swing.JLabel();
+        lblCodigo = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         lblMensagem = new javax.swing.JLabel();
@@ -55,8 +56,8 @@ public class JFUsuario extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtSenha = new javax.swing.JTextField();
         pnlTitulo = new javax.swing.JPanel();
-        txtTitulo = new javax.swing.JLabel();
-        txtTitulo2 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblTitulo2 = new javax.swing.JLabel();
 
         jTextField3.setText("jTextField3");
 
@@ -69,14 +70,14 @@ public class JFUsuario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Placa", "Cor", "Descrição"
+                "Código", "Login", "Nome", "Senha", "Admin"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -93,6 +94,13 @@ public class JFUsuario extends javax.swing.JFrame {
             }
         });
         jScrollPane4.setViewportView(tbConsulta);
+        if (tbConsulta.getColumnModel().getColumnCount() > 0) {
+            tbConsulta.getColumnModel().getColumn(0).setResizable(false);
+            tbConsulta.getColumnModel().getColumn(1).setResizable(false);
+            tbConsulta.getColumnModel().getColumn(2).setResizable(false);
+            tbConsulta.getColumnModel().getColumn(3).setResizable(false);
+            tbConsulta.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         pnlEspaco.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -130,15 +138,15 @@ public class JFUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnPesquisarUsu.setText("Pesquisar");
-        btnPesquisarUsu.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnPesquisarUsuMouseClicked(evt);
+                btnPesquisarMouseClicked(evt);
             }
         });
-        btnPesquisarUsu.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarUsuActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
@@ -168,7 +176,7 @@ public class JFUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnExcluirUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPesquisarUsu)
+                .addComponent(btnPesquisar)
                 .addGap(18, 18, 18)
                 .addComponent(btnLimparUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,14 +192,14 @@ public class JFUsuario extends javax.swing.JFrame {
                     .addComponent(btnIncluirUsu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExcluirUsu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAlterarUsu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPesquisarUsu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLimparUsu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pnlCentral.setBackground(new java.awt.Color(204, 204, 255));
 
-        lvlCodigo.setText("Código:");
+        lblCodigo.setText("Código:");
 
         lblLogin.setText("Login:");
 
@@ -220,7 +228,7 @@ public class JFUsuario extends javax.swing.JFrame {
             .addGroup(pnlCentralLayout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lvlCodigo)
+                    .addComponent(lblCodigo)
                     .addComponent(lblSenha)
                     .addComponent(lblNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -246,17 +254,14 @@ public class JFUsuario extends javax.swing.JFrame {
         pnlCentralLayout.setVerticalGroup(
             pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCentralLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCentralLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lvlCodigo)))
-                    .addGroup(pnlCentralLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLogin))))
+                    .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCodigo))
+                    .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblLogin)))
                 .addGap(4, 4, 4)
                 .addComponent(rbAdmin)
                 .addGap(1, 1, 1)
@@ -274,13 +279,13 @@ public class JFUsuario extends javax.swing.JFrame {
 
         pnlTitulo.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        txtTitulo.setForeground(new java.awt.Color(204, 204, 255));
-        txtTitulo.setText("Cadastramento de Usuários");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(204, 204, 255));
+        lblTitulo.setText("Cadastramento de Usuários");
 
-        txtTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtTitulo2.setForeground(new java.awt.Color(204, 204, 255));
-        txtTitulo2.setText("por Rafael Ferreira Goulart");
+        lblTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo2.setForeground(new java.awt.Color(204, 204, 255));
+        lblTitulo2.setText("por Rafael Ferreira Goulart");
 
         javax.swing.GroupLayout pnlTituloLayout = new javax.swing.GroupLayout(pnlTitulo);
         pnlTitulo.setLayout(pnlTituloLayout);
@@ -288,20 +293,20 @@ public class JFUsuario extends javax.swing.JFrame {
             pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTituloLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(txtTitulo)
+                .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(txtTitulo2)
+                .addComponent(lblTitulo2)
                 .addContainerGap())
         );
         pnlTituloLayout.setVerticalGroup(
             pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtTitulo2)
+                .addComponent(lblTitulo2)
                 .addGap(19, 19, 19))
             .addGroup(pnlTituloLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(txtTitulo)
+                .addComponent(lblTitulo)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -330,6 +335,7 @@ public class JFUsuario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbConsultaMouseClicked
@@ -365,6 +371,8 @@ public class JFUsuario extends javax.swing.JFrame {
         cb.setSenha(txtSenha.getText());
         cb.setAdmin(rbAdmin.isSelected());
         
+        lblMensagem.setText(cd.alterarUsuario(cb));
+        
         Conexao.fecharConexao(con);
     }//GEN-LAST:event_btnAlterarUsuMouseClicked
 
@@ -392,30 +400,59 @@ public class JFUsuario extends javax.swing.JFrame {
         Conexao.fecharConexao(con);
     }//GEN-LAST:event_btnExcluirUsuMouseClicked
 
-    private void btnPesquisarUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesquisarUsuMouseClicked
+    private void btnPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesquisarMouseClicked
         //Pesquisando valores do Banco de dados
         Connection con = Conexao.abrirConexao();
-
-        CarroDAO cd = new CarroDAO(con);
-
-        List<CarroBean> listaCarro = new ArrayList<CarroBean>();
-        listaCarro = cd.listarTodos();
+   
+        UsuarioDAO ud = new UsuarioDAO(con);
+        
+        List<UsuarioBean> listaUsuario = new ArrayList<UsuarioBean>();
+        listaUsuario = ud.listarTodos();
+        
         DefaultTableModel tbm = (DefaultTableModel) tbConsulta.getModel();
         
-        Conexao.fecharConexao(con);
-    }//GEN-LAST:event_btnPesquisarUsuMouseClicked
+        for (int i = tbm.getRowCount() - 1; i >= 0; i--) {
+            tbm.removeRow(i);
+        }
+        
+        int i = 0;
+        for (UsuarioBean ub : listaUsuario) {
+            tbm.addRow(new String[1]);
+            
+            tbConsulta.setValueAt(ub.getCodigo(), i, 0);
+            tbConsulta.setValueAt(ub.getLogin(), i, 1);
+            tbConsulta.setValueAt(ub.getNome(), i, 2);
+            tbConsulta.setValueAt(ub.getSenha(), i, 3);
+            tbConsulta.setValueAt(ub.getAdmin(), i, 4);
+        
+            i++;
+        }
+        Conexao.fecharConexao(con);              
+    }//GEN-LAST:event_btnPesquisarMouseClicked
 
-    private void btnPesquisarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarUsuActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnPesquisarUsuActionPerformed
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnLimparUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparUsuMouseClicked
+    //Limpando dados
+        txtLogin.setText("");
+        txtNome.setText("");
+        txtSenha.setText("");
         
+        lblMensagem.setText("");
+        
+        DefaultTableModel tbm = (DefaultTableModel) tbConsulta.getModel();
+        for (int i = tbm.getRowCount ()-1; i >= 0; i--) {
+            tbm.removeRow(i);   
+        } 
     }//GEN-LAST:event_btnLimparUsuMouseClicked
 
     private void btnVoltarUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarUsuMouseClicked
         //Fecha a janela
-        System.exit(0);
+        JFMenu abrir = new JFMenu();
+        abrir.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVoltarUsuMouseClicked
 
     private void rbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAdminActionPerformed
@@ -458,68 +495,21 @@ public class JFUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterar;
-    private javax.swing.JButton btnAlterar1;
-    private javax.swing.JButton btnAlterar2;
-    private javax.swing.JButton btnAlterar3;
-    private javax.swing.JButton btnAlterar4;
-    private javax.swing.JButton btnAlterar5;
-    private javax.swing.JButton btnAlterar6;
     private javax.swing.JButton btnAlterarUsu;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnExcluir1;
-    private javax.swing.JButton btnExcluir2;
-    private javax.swing.JButton btnExcluir3;
-    private javax.swing.JButton btnExcluir4;
-    private javax.swing.JButton btnExcluir5;
-    private javax.swing.JButton btnExcluir6;
     private javax.swing.JButton btnExcluirUsu;
-    private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnFechar1;
-    private javax.swing.JButton btnFechar2;
-    private javax.swing.JButton btnFechar3;
-    private javax.swing.JButton btnFechar4;
-    private javax.swing.JButton btnFechar5;
-    private javax.swing.JButton btnFechar6;
-    private javax.swing.JButton btnIncluir;
-    private javax.swing.JButton btnIncluir1;
-    private javax.swing.JButton btnIncluir2;
-    private javax.swing.JButton btnIncluir3;
-    private javax.swing.JButton btnIncluir4;
-    private javax.swing.JButton btnIncluir5;
-    private javax.swing.JButton btnIncluir6;
     private javax.swing.JButton btnIncluirUsu;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnLimpar1;
-    private javax.swing.JButton btnLimpar2;
-    private javax.swing.JButton btnLimpar3;
-    private javax.swing.JButton btnLimpar4;
-    private javax.swing.JButton btnLimpar5;
-    private javax.swing.JButton btnLimpar6;
     private javax.swing.JButton btnLimparUsu;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JButton btnPesquisar1;
-    private javax.swing.JButton btnPesquisar2;
-    private javax.swing.JButton btnPesquisar3;
-    private javax.swing.JButton btnPesquisar4;
-    private javax.swing.JButton btnPesquisar5;
-    private javax.swing.JButton btnPesquisar6;
-    private javax.swing.JButton btnPesquisarUsu;
     private javax.swing.JButton btnVoltarUsu;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSenha;
-    private javax.swing.JLabel lvlCodigo;
-    private javax.swing.JPanel pnlBotoes;
-    private javax.swing.JPanel pnlBotoes1;
-    private javax.swing.JPanel pnlBotoes2;
-    private javax.swing.JPanel pnlBotoes3;
-    private javax.swing.JPanel pnlBotoes4;
-    private javax.swing.JPanel pnlBotoes5;
-    private javax.swing.JPanel pnlBotoes6;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo2;
     private javax.swing.JPanel pnlBotoes7;
     private javax.swing.JPanel pnlCentral;
     private javax.swing.JPanel pnlEspaco;
@@ -530,7 +520,5 @@ public class JFUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSenha;
-    private javax.swing.JLabel txtTitulo;
-    private javax.swing.JLabel txtTitulo2;
     // End of variables declaration//GEN-END:variables
 }

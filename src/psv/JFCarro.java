@@ -39,8 +39,8 @@ public class JFCarro extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         pnlTitulo = new javax.swing.JPanel();
-        txtTitulo = new javax.swing.JLabel();
-        txtTitulo2 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblTitulo2 = new javax.swing.JLabel();
         pnlCentral = new javax.swing.JPanel();
         lblPlaca = new javax.swing.JLabel();
         lblCor = new javax.swing.JLabel();
@@ -100,18 +100,19 @@ public class JFCarro extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setUndecorated(true);
         setResizable(false);
 
         pnlTitulo.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        txtTitulo.setForeground(new java.awt.Color(204, 204, 255));
-        txtTitulo.setText("Cadastramento de Veículos");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(204, 204, 255));
+        lblTitulo.setText("Cadastramento de Veículos");
 
-        txtTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtTitulo2.setForeground(new java.awt.Color(204, 204, 255));
-        txtTitulo2.setText("por Rafael Ferreira Goulart");
+        lblTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo2.setForeground(new java.awt.Color(204, 204, 255));
+        lblTitulo2.setText("por Rafael Ferreira Goulart");
 
         javax.swing.GroupLayout pnlTituloLayout = new javax.swing.GroupLayout(pnlTitulo);
         pnlTitulo.setLayout(pnlTituloLayout);
@@ -119,20 +120,20 @@ public class JFCarro extends javax.swing.JFrame {
             pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTituloLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(txtTitulo)
+                .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(txtTitulo2)
+                .addComponent(lblTitulo2)
                 .addContainerGap())
         );
         pnlTituloLayout.setVerticalGroup(
             pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtTitulo2)
+                .addComponent(lblTitulo2)
                 .addGap(19, 19, 19))
             .addGroup(pnlTituloLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(txtTitulo)
+                .addComponent(lblTitulo)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -409,8 +410,10 @@ public class JFCarro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarMouseClicked
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-        //Fecha a janela
-        System.exit(0);
+        //Voltar ao menu
+        JFMenu abrir = new JFMenu();
+        abrir.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVoltarMouseClicked
 
     private void tbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbConsultaMouseClicked
@@ -519,6 +522,8 @@ public class JFCarro extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblPlaca;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo2;
     private javax.swing.JPanel pnlBotoes;
     private javax.swing.JPanel pnlCentral;
     private javax.swing.JPanel pnlEspaco;
@@ -527,7 +532,5 @@ public class JFCarro extends javax.swing.JFrame {
     private javax.swing.JTextField txtCor;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtPlaca;
-    private javax.swing.JLabel txtTitulo;
-    private javax.swing.JLabel txtTitulo2;
     // End of variables declaration//GEN-END:variables
 }

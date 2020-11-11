@@ -81,6 +81,8 @@ public class UsuarioDAO {
                     ub.setNome(rs.getString(3));
                     ub.setSenha(rs.getString(4));
                     ub.setAdmin(rs.getBoolean(5));
+                    
+                    listaUsuarios.add(ub);
                 }
                 return listaUsuarios;
             } else {
@@ -111,5 +113,32 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             return ex.getMessage();
         }
+    }
+    
+    public boolean checkLogin(String login, String senha) {
+        
+        Connection con = Conexao.abrirConexao();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean check = false;
+        
+        try {
+            ps = con.prepareStatement("select * from tbusuario where login = ? and senha = ?");
+            ps.setString(1, login);
+            ps.setString(2, senha);
+            
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                
+                check = true;
+            } else {
+                check = false;
+            }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return check;
     }
 }

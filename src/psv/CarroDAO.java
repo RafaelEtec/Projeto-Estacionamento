@@ -92,7 +92,6 @@ public class CarroDAO {
     public List<CarroBean> listarTodos() {
         String sql = "select * from tbcarro";
 
-        //Criando um vetor ou matriz vazia para carregar os valores do BD
         List<CarroBean> listaCarros = new ArrayList<>();
 
         try {
