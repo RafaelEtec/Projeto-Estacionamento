@@ -19,7 +19,6 @@ public class JFLogin extends javax.swing.JFrame {
      */
     public JFLogin() {
         initComponents();
-        lblMensagem.setText("");
     }
 
     /**
@@ -40,7 +39,6 @@ public class JFLogin extends javax.swing.JFrame {
         txtLogin = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        lblMensagem = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,8 +73,6 @@ public class JFLogin extends javax.swing.JFrame {
             }
         });
 
-        lblMensagem.setText("Mensagem");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -96,13 +92,9 @@ public class JFLogin extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(lblMensagem)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(21, 21, 21))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,13 +107,11 @@ public class JFLogin extends javax.swing.JFrame {
                 .addComponent(lblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(lblMensagem)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
                     .addComponent(btnSair))
-                .addContainerGap())
+                .addGap(32, 32, 32))
         );
 
         txtTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -192,8 +182,13 @@ public class JFLogin extends javax.swing.JFrame {
         UsuarioBean cb = new UsuarioBean();
         UsuarioDAO cd = new UsuarioDAO(con);
        
-        if(cd.checkLogin(txtLogin.getText(), txtSenha.getText())) {
+        if(cd.checkLogin(txtLogin.getText(),txtSenha.getText())) {
             new JFMenu().setVisible(true);
+            if (cd.checkAdmin(txtLogin.getText(), txtSenha.getText())) {
+                JFMenu.btnGU.setEnabled(true);
+            } else {
+                JFMenu.btnGU.setEnabled(false);
+            }
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Senha ou Usuário incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -202,7 +197,7 @@ public class JFLogin extends javax.swing.JFrame {
         }
         Conexao.fecharConexao(con);
     }//GEN-LAST:event_btnEntrarActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -244,7 +239,6 @@ public class JFLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtLogin;

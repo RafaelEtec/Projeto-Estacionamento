@@ -411,8 +411,6 @@ public class JFCarro extends javax.swing.JFrame {
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
         //Voltar ao menu
-        JFMenu abrir = new JFMenu();
-        abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarMouseClicked
 

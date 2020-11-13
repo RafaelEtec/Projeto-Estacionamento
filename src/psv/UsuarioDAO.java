@@ -116,14 +116,13 @@ public class UsuarioDAO {
     }
     
     public boolean checkLogin(String login, String senha) {
+        String sql = "select * from tbusuario where login = ? and senha = ?";
         
-        Connection con = Conexao.abrirConexao();
-        PreparedStatement ps = null;
         ResultSet rs = null;
-        boolean check = false;
+        boolean checkConta = false;
         
         try {
-            ps = con.prepareStatement("select * from tbusuario where login = ? and senha = ?");
+            PreparedStatement ps = getCon().prepareStatement(sql);
             ps.setString(1, login);
             ps.setString(2, senha);
             
@@ -131,14 +130,40 @@ public class UsuarioDAO {
             
             if (rs.next()) {
                 
-                check = true;
+                checkConta = true;
             } else {
-                check = false;
+                checkConta = false;
             }
            
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return check;
+        return checkConta;
+    }
+   
+    public boolean checkAdmin(String login, String senha) {
+        String sql = "select * from tbusuario where admin = true having login = ? and senha = ?";
+        
+        ResultSet rs = null;
+        boolean checkAdm = false;
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, login);
+            ps.setString(2, senha);
+           
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                
+                checkAdm = true;
+            } else {
+                
+                checkAdm = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return checkAdm;
     }
 }

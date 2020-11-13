@@ -439,6 +439,7 @@ public class JFUsuario extends javax.swing.JFrame {
         txtLogin.setText("");
         txtNome.setText("");
         txtSenha.setText("");
+        txtCodigo.setText("0000");
         
         lblMensagem.setText("");
         
@@ -450,8 +451,6 @@ public class JFUsuario extends javax.swing.JFrame {
 
     private void btnVoltarUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarUsuMouseClicked
         //Fecha a janela
-        JFMenu abrir = new JFMenu();
-        abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarUsuMouseClicked
 
