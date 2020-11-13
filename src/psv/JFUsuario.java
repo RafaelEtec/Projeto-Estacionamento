@@ -339,7 +339,18 @@ public class JFUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbConsultaMouseClicked
+        Integer linha = tbConsulta.getSelectedRow();
+        String codigo = (String) tbConsulta.getValueAt(linha, 0);
+        String login = (String) tbConsulta.getValueAt(linha, 1);
+        String nome = (String) tbConsulta.getValueAt(linha, 2);
+        String senha = (String) tbConsulta.getValueAt(linha, 3);
+        Boolean adm = (Boolean) tbConsulta.getValueAt(linha, 4);
         
+        txtCodigo.setText(codigo);
+        txtLogin.setText(login);
+        txtNome.setText(nome);
+        txtSenha.setText(senha);
+        rbAdmin.setSelected(adm);
     }//GEN-LAST:event_tbConsultaMouseClicked
 
     private void btnIncluirUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIncluirUsuMouseClicked
