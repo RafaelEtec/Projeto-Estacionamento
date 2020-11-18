@@ -41,6 +41,7 @@ public class JFCarro extends javax.swing.JFrame {
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblTitulo2 = new javax.swing.JLabel();
+        lblConfirmaCodigo = new javax.swing.JLabel();
         pnlCentral = new javax.swing.JPanel();
         lblPlaca = new javax.swing.JLabel();
         lblCor = new javax.swing.JLabel();
@@ -114,6 +115,9 @@ public class JFCarro extends javax.swing.JFrame {
         lblTitulo2.setForeground(new java.awt.Color(204, 204, 255));
         lblTitulo2.setText("por Rafael Ferreira Goulart");
 
+        lblConfirmaCodigo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblConfirmaCodigo.setText("Codigo");
+
         javax.swing.GroupLayout pnlTituloLayout = new javax.swing.GroupLayout(pnlTitulo);
         pnlTitulo.setLayout(pnlTituloLayout);
         pnlTituloLayout.setHorizontalGroup(
@@ -122,13 +126,17 @@ public class JFCarro extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(lblTitulo2)
+                .addGroup(pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitulo2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblConfirmaCodigo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         pnlTituloLayout.setVerticalGroup(
             pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblConfirmaCodigo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTitulo2)
                 .addGap(19, 19, 19))
             .addGroup(pnlTituloLayout.createSequentialGroup()
@@ -410,7 +418,20 @@ public class JFCarro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarMouseClicked
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-        //Voltar ao menu
+        Connection con = Conexao.abrirConexao();
+        UsuarioBean ub = new UsuarioBean();
+        UsuarioDAO ud = new UsuarioDAO(con);
+        
+        JFMenu abrir = new JFMenu();
+        abrir.setVisible(true);
+        
+        if (ud.checkAdminCodigo(lblConfirmaCodigo.getText())) {
+            JFMenu.btnGU.setEnabled(true);
+        } else {
+            JFMenu.btnGU.setEnabled(false);
+        }
+        
+        JFMenu.lblConfirmaCodigo.setText(JFCarro.lblConfirmaCodigo.getText());
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarMouseClicked
 
@@ -516,6 +537,7 @@ public class JFCarro extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    public static javax.swing.JLabel lblConfirmaCodigo;
     private javax.swing.JLabel lblCor;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblMensagem;

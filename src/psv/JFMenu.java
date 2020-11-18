@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package psv;
+
+import java.sql.Connection;
+
 /**
  *
  * @author rafae
@@ -35,6 +38,7 @@ public class JFMenu extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         btnGV = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        lblConfirmaCodigo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -124,6 +128,9 @@ public class JFMenu extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        lblConfirmaCodigo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblConfirmaCodigo.setText("Codigo");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -134,16 +141,18 @@ public class JFMenu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txtTitulo)
-                        .addGap(143, 143, 143))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(95, 95, 95)
+                        .addComponent(lblConfirmaCodigo))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTitulo)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTitulo)
+                    .addComponent(lblConfirmaCodigo))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -188,13 +197,25 @@ public class JFMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGVActionPerformed
+        Connection con = Conexao.abrirConexao();
+        UsuarioBean ub = new UsuarioBean();
+        UsuarioDAO ud = new UsuarioDAO(con);
+        
         JFCarro abrir = new JFCarro();
         abrir.setVisible(true);
+        JFCarro.lblConfirmaCodigo.setText(JFMenu.lblConfirmaCodigo.getText());
+        this.setVisible(false);
     }//GEN-LAST:event_btnGVActionPerformed
 
     private void btnGUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGUActionPerformed
+        Connection con = Conexao.abrirConexao();
+        UsuarioBean ub = new UsuarioBean();
+        UsuarioDAO ud = new UsuarioDAO(con);
+        
         JFUsuario abrir = new JFUsuario();
         abrir.setVisible(true);
+        JFUsuario.lblConfirmaCodigo.setText(JFMenu.lblConfirmaCodigo.getText());
+        this.setVisible(false);
     }//GEN-LAST:event_btnGUActionPerformed
 
     /**
@@ -241,6 +262,7 @@ public class JFMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    public static javax.swing.JLabel lblConfirmaCodigo;
     private javax.swing.JLabel txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

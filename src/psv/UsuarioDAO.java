@@ -166,4 +166,51 @@ public class UsuarioDAO {
         }
         return checkAdm;
     }
+    
+    public boolean checkAdminCodigo(String codigo) {
+        String sql = "select * from tbusuario where admin = true having codigo = ?";
+        
+        ResultSet rs = null;
+        boolean checkAdmCod = false;
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, codigo);
+           
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                
+                checkAdmCod = true;
+            } else {
+                
+                checkAdmCod = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return checkAdmCod;
+    }
+    
+    public String pegaCodigo(String login, String senha) {
+        String sql = "select codigo from tbusuario where login = ? and senha = ?";
+    
+        String cod = "";
+        ResultSet rs = null;
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, login);
+            ps.setString(2, senha);
+            
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+
+                cod = rs.getString("codigo");
+            }
+            return cod;
+        } catch (SQLException ex) {
+            return ex.getMessage();
+        }
+    }
 }

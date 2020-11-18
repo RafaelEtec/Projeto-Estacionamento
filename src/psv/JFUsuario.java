@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.*;
 import javax.swing.*;
+import static psv.JFCarro.lblConfirmaCodigo;
 /**
  *
  * @author rafae
@@ -58,6 +59,7 @@ public class JFUsuario extends javax.swing.JFrame {
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblTitulo2 = new javax.swing.JLabel();
+        lblConfirmaCodigo = new javax.swing.JLabel();
 
         jTextField3.setText("jTextField3");
 
@@ -287,6 +289,9 @@ public class JFUsuario extends javax.swing.JFrame {
         lblTitulo2.setForeground(new java.awt.Color(204, 204, 255));
         lblTitulo2.setText("por Rafael Ferreira Goulart");
 
+        lblConfirmaCodigo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblConfirmaCodigo.setText("Codigo");
+
         javax.swing.GroupLayout pnlTituloLayout = new javax.swing.GroupLayout(pnlTitulo);
         pnlTitulo.setLayout(pnlTituloLayout);
         pnlTituloLayout.setHorizontalGroup(
@@ -295,13 +300,17 @@ public class JFUsuario extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(lblTitulo2)
+                .addGroup(pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitulo2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblConfirmaCodigo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         pnlTituloLayout.setVerticalGroup(
             pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblConfirmaCodigo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTitulo2)
                 .addGap(19, 19, 19))
             .addGroup(pnlTituloLayout.createSequentialGroup()
@@ -356,16 +365,16 @@ public class JFUsuario extends javax.swing.JFrame {
     private void btnIncluirUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIncluirUsuMouseClicked
         //Criando e inserindo valores no Banco de dados
         Connection con = Conexao.abrirConexao();
-        UsuarioBean cb = new UsuarioBean();
-        UsuarioDAO cd = new UsuarioDAO(con);
+        UsuarioBean ub = new UsuarioBean();
+        UsuarioDAO ud = new UsuarioDAO(con);
 
-        cb.setCodigo(txtCodigo.getText());
-        cb.setLogin(txtLogin.getText());
-        cb.setNome(txtNome.getText());
-        cb.setSenha(txtSenha.getText());
-        cb.setAdmin(rbAdmin.isSelected());
+        ub.setCodigo(txtCodigo.getText());
+        ub.setLogin(txtLogin.getText());
+        ub.setNome(txtNome.getText());
+        ub.setSenha(txtSenha.getText());
+        ub.setAdmin(rbAdmin.isSelected());
         
-        lblMensagem.setText(cd.inserirUsuario(cb));
+        lblMensagem.setText(ud.inserirUsuario(ub));
         
         Conexao.fecharConexao(con);
     }//GEN-LAST:event_btnIncluirUsuMouseClicked
@@ -373,16 +382,16 @@ public class JFUsuario extends javax.swing.JFrame {
     private void btnAlterarUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarUsuMouseClicked
         //Alterando valores no Banco de dados
         Connection con = Conexao.abrirConexao();
-        UsuarioBean cb = new UsuarioBean();
-        UsuarioDAO cd = new UsuarioDAO(con);
+        UsuarioBean ub = new UsuarioBean();
+        UsuarioDAO ud = new UsuarioDAO(con);
 
-        cb.setCodigo(txtCodigo.getText());
-        cb.setLogin(txtLogin.getText());
-        cb.setNome(txtNome.getText());
-        cb.setSenha(txtSenha.getText());
-        cb.setAdmin(rbAdmin.isSelected());
+        ub.setCodigo(txtCodigo.getText());
+        ub.setLogin(txtLogin.getText());
+        ub.setNome(txtNome.getText());
+        ub.setSenha(txtSenha.getText());
+        ub.setAdmin(rbAdmin.isSelected());
         
-        lblMensagem.setText(cd.alterarUsuario(cb));
+        lblMensagem.setText(ud.alterarUsuario(ub));
         
         Conexao.fecharConexao(con);
     }//GEN-LAST:event_btnAlterarUsuMouseClicked
@@ -390,10 +399,10 @@ public class JFUsuario extends javax.swing.JFrame {
     private void btnExcluirUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirUsuMouseClicked
         //Excluindo registros da tabela no Banco de dados
         Connection con = Conexao.abrirConexao();
-        UsuarioBean cb = new UsuarioBean();
-        UsuarioDAO cd = new UsuarioDAO(con);
+        UsuarioBean ub = new UsuarioBean();
+        UsuarioDAO ud = new UsuarioDAO(con);
 
-        cb.setCodigo(txtCodigo.getText());
+        ub.setCodigo(txtCodigo.getText());
 
         Object [] opcoes = {"Sim","Não"};
         int i = JOptionPane.showOptionDialog(
@@ -406,7 +415,7 @@ public class JFUsuario extends javax.swing.JFrame {
                     opcoes,
                     opcoes[0]);
         if (i == JOptionPane.YES_NO_OPTION) {
-            lblMensagem.setText(cd.excluirUsuario(cb));
+            lblMensagem.setText(ud.excluirUsuario(ub));
         }
         Conexao.fecharConexao(con);
     }//GEN-LAST:event_btnExcluirUsuMouseClicked
@@ -461,7 +470,20 @@ public class JFUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparUsuMouseClicked
 
     private void btnVoltarUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarUsuMouseClicked
-        //Fecha a janela
+        Connection con = Conexao.abrirConexao();
+        UsuarioBean ub = new UsuarioBean();
+        UsuarioDAO ud = new UsuarioDAO(con);
+        
+        JFMenu abrir = new JFMenu();
+        abrir.setVisible(true);
+        
+        if (ud.checkAdminCodigo(lblConfirmaCodigo.getText())) {
+            JFMenu.btnGU.setEnabled(true);
+        } else {
+            JFMenu.btnGU.setEnabled(false);
+        }
+        
+        JFMenu.lblConfirmaCodigo.setText(JFUsuario.lblConfirmaCodigo.getText());
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarUsuMouseClicked
 
@@ -514,6 +536,7 @@ public class JFUsuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblCodigo;
+    public static javax.swing.JLabel lblConfirmaCodigo;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblNome;

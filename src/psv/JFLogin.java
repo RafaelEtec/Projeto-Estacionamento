@@ -122,14 +122,15 @@ public class JFLogin extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(txtTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(txtTitulo)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,12 +180,14 @@ public class JFLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         Connection con = Conexao.abrirConexao();
-        UsuarioBean cb = new UsuarioBean();
-        UsuarioDAO cd = new UsuarioDAO(con);
+        UsuarioBean ub = new UsuarioBean();
+        UsuarioDAO ud = new UsuarioDAO(con);
        
-        if(cd.checkLogin(txtLogin.getText(),txtSenha.getText())) {
+        if(ud.checkLogin(txtLogin.getText(),txtSenha.getText())) {
             new JFMenu().setVisible(true);
-            if (cd.checkAdmin(txtLogin.getText(), txtSenha.getText())) {
+            String codigo = ud.pegaCodigo(txtLogin.getText(), txtSenha.getText());
+            JFMenu.lblConfirmaCodigo.setText(codigo);
+            if (ud.checkAdmin(txtLogin.getText(), txtSenha.getText())) {
                 JFMenu.btnGU.setEnabled(true);
             } else {
                 JFMenu.btnGU.setEnabled(false);
